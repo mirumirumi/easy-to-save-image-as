@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 1em 1em 0.13em;
+    width: 400px;
+    font-size: 0.9em;
+    background-color: #fffcf9;
+}
+.content-wrap {
+    width: 100%;
+    height: 100%;
+}
+.title-wrap {
+    margin-bottom: 1em;
+}
+.title-tag {
+    margin-bottom: 1em;
+    padding: 0.1em 0.5em;
+    color: #4e4e4e;
+    font-size: 0.95em;
+    font-weight: bold;
+    border-bottom: solid 1px #ddd;
+}
+.title-content {
+    font-size: 1.1em;
+    color: #3e3e3e;
+}
+.nav {
+    font-size: 0.9em;
+}
+.nav-link {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    color: #975e35;
+}
+.setting-wrap {
+    margin: 1.7em 0 0.1em;
+}
+#enable-switch {
+    margin: 0 0 1.3em;
+}
+.key-set-wrap {
+    position: relative;
+}
+#key-set {
+    margin: 0 0 1.5em;
+    padding-right: 5em;
+}
+.form-icon {
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 16px;
+    top: 53%;
+    transform: translateY(-50%);
+    right: 5%;
+    cursor: pointer;
+}
+.check-icon {
+    right: 13%;
+    background: url(icon/check.png) no-repeat 0 0/16px;
+}
+.cross-icon {
+    background: url(icon/cross.png) no-repeat 0 0/16px;
+}
+#save-btn {
+    display: block;
+    margin: 1.1em auto 0.1em;
+    padding: 0.1em 0.7em 0.25em;
+    background-color: #928679;
+    border-color: #928679;
+}
+#saved-msg {
+    text-align: center;
+}
+.sm-text {
+    visibility: hidden;
+    font-size: 0.9em;
+}
+.failed {
+    color: #ff5151;
+}
+.footer-wrap .nav-link {
+    color: #ababab;
+}
+
+
+/* override bootstrap focus design */
+
+.form-control:focus {
+    border-color: #cfb6a0;
+    box-shadow: 0 0 0 0.2rem rgb(178 110 64 / 25%);
+}
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #b5a191;
+    background-color: #7b5333;
+}
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: #d7bfb1;
+}
+.custom-control-input:focus~.custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgb(100 62 36 / 25%);
+}
+.custom-radio .custom-control-input:disabled:checked~.custom-control-label::before {
+    background-color: rgb(180 139 108 / 50%);
+}
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
+    background-color: #ecdccd;
+    border-color: #ecdccd;
+}
+
+

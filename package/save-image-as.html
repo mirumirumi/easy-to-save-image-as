@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content-wrap">
+        <div class="title-wrap">
+            <div class="title-tag">Easy to Save Image As</div>
+            <span class="title-content"></span>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="/save-image-as.html">Save Image As</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/copy-image.html">Copy Image</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/copy-image-url.html">Copy Image URL</a>
+            </li>
+        </ul>
+
+        <div class="setting-wrap">
+            <div class="custom-control custom-switch" id="enable-switch">
+                <input type="checkbox" class="custom-control-input" id="enable-save-image-as">
+                <label class="custom-control-label" for="enable-save-image-as">Enable Shortcut</label>
+            </div>
+
+            <div class="key-set-wrap">
+                <input class="form-control" id="key-set" type="text" placeholder="Type any keys..." inputmode="tel">
+                <span class="form-icon check"></span>
+                <span class="form-icon cross"></span>
+            </div>
+
+            <div class="custom-control custom-radio" id="left-click-wrap">
+                <input type="radio" id="left-click" name="clicks" class="custom-control-input" checked>
+                <label class="custom-control-label" for="left-click">Left Click</label>
+            </div>
+            <div class="custom-control custom-radio" id="right-click-wrap">
+                <input type="radio" id="right-click" name="clicks" class="custom-control-input">
+                <label class="custom-control-label" for="right-click">Right Click</label>
+            </div>
+            <div class="custom-control custom-radio" id="both-click-wrap">
+                <input type="radio" id="both-click" name="clicks" class="custom-control-input">
+                <label class="custom-control-label" for="both-click">Both</label>
+            </div>
+
+            <button type="button" class="btn btn-secondary" id="save-btn">Save</button>
+            <div id="saved-msg">
+                <span class="sm-text">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="footer-wrap">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://milmemo.net/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/milmemo_net">Twitter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chrome.google.com/webstore/detail/opjhacmpfbfcjjpleemaelinjikggjff">Chrome Web Store</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script defer src="lib/jquery.js"></script>
+    <script defer src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
