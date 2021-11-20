@@ -1,31 +1,41 @@
 {
-  "name": "Easy to Save Image As (名前を付けて画像を保存)",
-  "short_name": "Etosia",
-  "version": "1.2.2.0",
-  "manifest_version": 2,
-  "description": "\"Save Image As\" can be easily done with any key + click. Multiple keys can be set.   「名前を付けて画像を保存」を任意のキー＋クリックで行えるようにします。キーは複数設定可能です。",
-  "icons": {
-    "32" : "icon/icon_32.png",
-    "48" : "icon/icon_48.png",
-    "128": "icon/icon_128.png"
-  },
-  "permissions": [
-    "background",
-    "storage",
-    "downloads",
-    "clipboardWrite"
-  ],
-  "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
-    "js": ["lib/jquery.js", "content-script.js"]
-  }],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_icon": "icon/icon_128.png",
-    "default_title": "Easy to Save Image As",
-    "default_popup": "save-image-as.html"
-  }
+    "name": "Easy to Save Image As (名前を付けて画像を保存)",
+    "short_name": "Etosia",
+    "version": "1.2.3.0",
+    "manifest_version": 2,
+    "description": "\"Save Image As\" can be easily done with any key + click. Multiple keys can be set.   「名前を付けて画像を保存」を任意のキー＋クリックで行えるようにします。キーは複数設定可能です。",
+    "icons": {
+        "32": "icon/icon_32.png",
+        "48": "icon/icon_48.png",
+        "128": "icon/icon_128.png"
+    },
+    "permissions": [
+        "background",
+        "storage",
+        "downloads",
+        "clipboardWrite"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "lib/jquery.js",
+                "content-script.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": "icon/icon_128.png",
+        "default_title": "Easy to Save Image As",
+        "default_popup": "save-image-as.html"
+    }
 }

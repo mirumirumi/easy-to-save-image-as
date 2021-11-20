@@ -82,7 +82,7 @@ $(document).keydown(function judgeExecShortcut(e) {
                 });
             } else if (settings[mode - 1][0] === "both-click") {
                 $("img").click(function () {
-                    $("img").on('contextmenu', function () {
+                    $("img").on("contextmenu", function () {
                         if (isInputting) {
                             execShortcut(mode, $(this));
                         }
@@ -90,7 +90,7 @@ $(document).keydown(function judgeExecShortcut(e) {
                     });
                 });
             } else if (settings[mode - 1][0] === "both-click") {
-                $("img").on('contextmenu', function () {
+                $("img").on("contextmenu", function () {
                     $("img").click(function () {
                         if (isInputting) {
                             execShortcut(mode, $(this));
@@ -123,7 +123,7 @@ function compareArrays(a, b) {
     return true;
 }
 
-function execShortcut(mode, obj) {
+async function execShortcut(mode, obj) {
     let schema = location.protocol;
     let host = location.hostname;
     let imgUrl = $(obj).attr("src");
@@ -140,38 +140,53 @@ function execShortcut(mode, obj) {
         imgUrl = schema + "//" + imgUrl;
     }
 
-    if (mode === SAVEIMAGEAS  && isExecOnce === false) execSaveImageAs(imgUrl);
-    if (mode === COPYIMAGE    && isExecOnce === false) execCopyImage(obj);
+    if (mode === SAVEIMAGEAS  && isExecOnce === false) execSaveImageAs(imgUrl, obj);
+    if (mode === COPYIMAGE    && isExecOnce === false) await execCopyImage(obj);
     if (mode === COPYIMAGEURL && isExecOnce === false) execCopyImageUrl(imgUrl);
 }
 
-function execSaveImageAs(url) {
-    if (url.includes(location.hostname)) { //same origin
-        let element = document.createElement('a');
-        element.href = url;
-        element.download = url.replace(/.*\/(.*?\..*?)\/?$/gi, "$1");
-        element.click();
-    } else { //different origin
-        chrome.runtime.sendMessage(url);
-    }
-    initFlags();
+async function execSaveImageAs(url, obj) {
+  let img = obj[0];
+  let element = document.createElement("a");
+  document.body.appendChild(element);
+  element.download = url.replace(/.*\/(.*?\..*?)\/?$/gi, "$1");
+  img.src = url;
+  img.crossOrigin = "Anonymous";
+  element.href = await encodeImgToBase64(img);
+  element.click();
+  element.remove();
+  initFlags();
+}
+
+function encodeImgToBase64(img) {
+  return new Promise(async (resolve) => {
+    const canvas = document.createElement("canvas");
+    img.onload = () => {
+      canvas.width  = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+  });
 }
 
 function execCopyImage(obj) {
+  return new Promise(async (resolve) => {
     let img = obj[0];
     img.crossOrigin = "Anonymous";
-    let canvas = document.createElement('canvas');
-    setTimeout(() => { //temporary way(1st copy failes absolutely, 2nd~ is ok)
+    let canvas = document.createElement("canvas");
+    img.onload = () =>{
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
-        let ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#fff';
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#fff";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
         canvas.toBlob((blob) => {
             let cbi = undefined;
             try {
-                cbi = [new ClipboardItem({ ["image/png"]: blob })];
+                cbi = [new ClipboardItem({["image/png"]: blob})];
                 navigator.clipboard.write(cbi)
             } catch (DOMException) { //can't understand why occurred error
                 //pass
@@ -179,8 +194,9 @@ function execCopyImage(obj) {
             notifyCopySuccessed();
             initFlags();
         }, "image/png");
-        return;
-    }, 31);
+        resolve();
+    };
+  });
 }
 
 function execCopyImageUrl(url) {
