@@ -1,9 +1,9 @@
 {
     "name": "Easy to Save Image As (名前を付けて画像を保存)",
-    "short_name": "Etosia",
-    "version": "1.2.3.0",
-    "manifest_version": 2,
-    "description": "\"Save Image As\" can be easily done with any key + click. Multiple keys can be set.   「名前を付けて画像を保存」を任意のキー＋クリックで行えるようにします。キーは複数設定可能です。",
+    "version": "1.3.0",
+    "manifest_version": 3,
+    "default_locale": "ja",
+    "description": "__MSG_Description__",
     "icons": {
         "32": "icon/icon_32.png",
         "48": "icon/icon_48.png",
@@ -14,6 +14,9 @@
         "storage",
         "downloads",
         "clipboardWrite"
+    ],
+    "host_permissions": [
+        "<all_urls>"
     ],
     "content_scripts": [
         {
@@ -28,12 +31,10 @@
         }
     ],
     "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
+        "service_worker": "background.js",
+        "type": "module"
     },
-    "browser_action": {
+    "action": {
         "default_icon": "icon/icon_128.png",
         "default_title": "Easy to Save Image As",
         "default_popup": "save-image-as.html"
